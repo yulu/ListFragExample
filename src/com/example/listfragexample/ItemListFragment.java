@@ -83,6 +83,12 @@ public class ItemListFragment extends Fragment{
 		listener.onMyItemSelected(title);
 	}
 	
+	static class ViewHolder{
+		public TextView text_title;
+		public TextView text_date;
+		public ImageView image;
+	}
+	
 	private class ItemArrayAdapter extends ArrayAdapter<String>{
 
 		private final Context context;
@@ -99,22 +105,31 @@ public class ItemListFragment extends Fragment{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent){
-			/**
-			 * inflate the layout and get element references
-			 */
-			LayoutInflater inflater = (LayoutInflater)context.getSystemService(
-					Context.LAYOUT_INFLATER_SERVICE);
-			View rowView = inflater.inflate(R.layout.row_view, parent, false);
-			TextView textViewTitle = (TextView)rowView.findViewById(R.id.row_title);
-			TextView textViewDate = (TextView)rowView.findViewById(R.id.row_date);
-			ImageView imageView = (ImageView)rowView.findViewById(R.id.row_logo);
+			View rowView = convertView;
+			if(rowView == null){
+				/**
+				 * inflate the layout and get element references
+				 */
+				LayoutInflater inflater = (LayoutInflater)context.getSystemService(
+						Context.LAYOUT_INFLATER_SERVICE);
+				rowView = inflater.inflate(R.layout.row_view, parent, false);
+				ViewHolder viewHolder = new ViewHolder();
+				
+				viewHolder.text_title = (TextView)rowView.findViewById(R.id.row_title);
+				viewHolder.text_date = (TextView)rowView.findViewById(R.id.row_date);
+				viewHolder.image = (ImageView)rowView.findViewById(R.id.row_logo);
+				
+				rowView.setTag(viewHolder);
+			}
+			
+			ViewHolder holder = (ViewHolder)rowView.getTag();
 
 			/**
 			 * set the view elements from the data
 			 */
-			textViewTitle.setText(getItem(position));
-			textViewDate.setText(R.string.date);
-			imageView.setImageResource(R.drawable.ic_launcher);
+			holder.text_title.setText(getItem(position));
+			holder.text_date.setText(R.string.date);
+			holder.image.setImageResource(R.drawable.ic_launcher);
 
 			return rowView;
 
