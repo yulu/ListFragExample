@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ListFragExample</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="default_value">default</string>
+    <string name="date">May 29, 2013</string>
+	<string name="default_txt">This is the a long paragraph to demostrate
+	    in the detail page, lalalallalalallalalalalalalallalal
+	    lalalallalallalalalla, lalalallalalaallalala</string>
+</resources>
